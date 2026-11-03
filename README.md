@@ -6,7 +6,7 @@ Dealer vehicle listings often omit the information a buyer needs: exact specific
 
 Version 0.1.2 is prepared on `submission-prep`; these changes need an approved redeploy. The existing live endpoint is **https://mcp.aicarvideo.com/mcp**, served through Netlify site `mcp-aicar-proxy` in front of the Cloudflare Worker. No deployment or submission is part of this preparation.
 
-Display name: **Car Listing Check**. Website: https://aicarvideo.com. Developer: **[SAFAK_DEVELOPER_NAME]** (option: AI Car Video; operator must confirm). Legal identity and contacts are placeholders in [submission/](submission/README.md). Tool descriptions and results contain no brand promotion.
+Display name: **Car Listing Check**. Website: https://aicarvideo.com. Developer: **AI Car Video** (operated by Safak Tepecik, per https://aicarvideo.com/about). Legal identity and contacts are filled in [submission/](submission/README.md). Tool descriptions and results contain no brand promotion.
 
 ## Tools
 
@@ -98,7 +98,7 @@ Inputs are processed in memory only and never stored by the application. Avoid p
 
 Optional Workers Analytics Engine support is guarded by `if (env.ANALYTICS)`. To enable after operator approval, uncomment the dataset block in wrangler.toml and configure the dataset in the operator's account. Data points use blobs `[tool, "true" or "false"]` and doubles `[milliseconds]` only. Review provider limits before enabling. Console logging remains enabled. Set a retention policy before launch; no production retention or processor terms have been confirmed. Review aggregate tool selection weekly and configure an external uptime monitor for /health after deployment. No external monitoring is set up.
 
-Drafts: [Privacy](docs/privacy-policy.md), [Terms](docs/terms-of-service.md), [Support and security contact](docs/support.md), [Catalog metadata](docs/listing.md), [Submission cases and golden prompts](docs/openai-test-cases.md). Contact and postal details remain explicit operator placeholders.
+Drafts: [Privacy](docs/privacy-policy.md), [Terms](docs/terms-of-service.md), [Support and security contact](docs/support.md), [Catalog metadata](docs/listing.md), [Submission cases and golden prompts](docs/openai-test-cases.md). Contact and postal details are filled from aicarvideo.com (privacy, terms, about).
 
 `server.json` is prepared for `com.aicarvideo/car-listing-check`, using the [2025-12-11 registry schema](https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json). It is NOT published. Domain authentication (DNS TXT or the registry well-known route) and Safak's approval remain required; no key or challenge is created. Before catalog submission: confirm domain and URLs, publish approved legal/support documents, verify developer identity, review the prepared square icon and record the demonstration video, run the golden prompts in real ChatGPT/Claude accounts, confirm retention/hosting terms and monitor the live service. Neither assistant end-to-end evaluation nor catalog acceptance is claimed.
 

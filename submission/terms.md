@@ -1,10 +1,10 @@
 # Car Listing Check Terms of Service
 
-Effective date: [EFFECTIVE_DATE]
+Effective date: 2026-11-03
 
 ## Operator and service
 
-Car Listing Check is operated by [SAFAK_LEGAL_NAME], [SAFAK_POSTAL_ADDRESS]. Contact: [SAFAK_CONTACT_EMAIL]. By using the service you agree to these terms, subject to applicable mandatory law. You must be at least 18 and authorised to submit the material you supply.
+Car Listing Check is operated by Safak Tepecik, operating as AI Car Video, Heidestraße 2, 58239 Schwerte, Germany. Contact: hello@aicarvideo.com. By using the service you agree to these terms, subject to applicable mandatory law. You must be at least 18 and authorised to submit the material you supply.
 
 The service checks supplied vehicle-listing text, structured fields and photo metadata, or returns a static listing checklist. It does not fetch or scrape URLs, inspect images, verify vehicle history or mechanical condition, appraise vehicles, generate AI images or videos, publish ads or certify legal compliance. A score measures editorial completeness under fixed rules; it does not predict sales or certify accuracy, safety or compliance. General market reminders do not replace professional advice or current portal requirements.
 
@@ -26,4 +26,4 @@ To the extent permitted by applicable law, the operator is not responsible for d
 
 ## Changes and contact
 
-Revised terms will carry an updated effective date and material changes will be described on this page. Changes apply prospectively to subsequent use, subject to applicable notice and consent requirements. Support: https://aicarvideo.com/mcp/support or [SAFAK_CONTACT_EMAIL]. Security reports: [SAFAK_SECURITY_CONTACT_EMAIL].
+Revised terms will carry an updated effective date and material changes will be described on this page. Changes apply prospectively to subsequent use, subject to applicable notice and consent requirements. Support: https://aicarvideo.com/mcp/support or hello@aicarvideo.com. Security reports: hello@aicarvideo.com.

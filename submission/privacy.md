@@ -1,10 +1,10 @@
 # Car Listing Check Privacy Policy
 
-Effective date: [EFFECTIVE_DATE]
+Effective date: 2026-11-03
 
 ## Operator and contact
 
-The operator and controller is [SAFAK_LEGAL_NAME], [SAFAK_POSTAL_ADDRESS]. Privacy questions and rights requests: [SAFAK_CONTACT_EMAIL]. Security reports: [SAFAK_SECURITY_CONTACT_EMAIL].
+The operator and controller is Safak Tepecik, operating as AI Car Video, Heidestraße 2, 58239 Schwerte, Germany. Privacy questions and rights requests: hello@aicarvideo.com. Security reports: hello@aicarvideo.com.
 
 ## Data and purposes
 
@@ -24,7 +24,7 @@ The live endpoint uses the Netlify proxy site mcp-aicar-proxy in front of a Clou
 
 Where GDPR applies, processing necessary to deliver a requested service relies on Article 6(1)(b) where a contract applies; availability and narrowly scoped abuse prevention rely on the legitimate interest in operating a reliable service under Article 6(1)(f). These grounds apply only insofar as their legal conditions are met. Do not provide another person's data without an appropriate basis.
 
-You choose what to submit, may omit optional fields and may stop using or disconnect the connector at any time. Depending on applicable law, you may request access, correction, erasure, restriction, portability or object to processing, including processing based on legitimate interests. Contact [SAFAK_CONTACT_EMAIL] with enough context to identify the issue, without resending sensitive listing content. There is no application account or saved listing record to retrieve or delete. Provider records may require separate handling. You may complain to your local data-protection supervisory authority; contact us for the authority competent for the operator.
+You choose what to submit, may omit optional fields and may stop using or disconnect the connector at any time. Depending on applicable law, you may request access, correction, erasure, restriction, portability or object to processing, including processing based on legitimate interests. Contact hello@aicarvideo.com with enough context to identify the issue, without resending sensitive listing content. There is no application account or saved listing record to retrieve or delete. Provider records may require separate handling. You may complain to your local data-protection supervisory authority; contact us for the authority competent for the operator.
 
 ## Children
 

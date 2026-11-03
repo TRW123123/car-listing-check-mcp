@@ -9,7 +9,7 @@
 
 Suggested categories: Productivity; Business (two suggestions; confirm available directory labels in the submission form).
 
-Developer: [SAFAK_DEVELOPER_NAME]. Suggested option: AI Car Video; operator confirmation required.
+Developer: AI Car Video (operated by Safak Tepecik); must match the verified publisher identity.
 
 ## Example prompts
 

@@ -3,7 +3,7 @@ import {validate} from './schema';
 import {tools} from './tools';
 import {version} from '../package.json';
 export interface Env {ANALYTICS?:{writeDataPoint(point:{blobs:string[];doubles:number[]}):void}}
-export const serverInfo={name:'car-listing-check',title:'Car Listing Check',version,websiteUrl:'https://aicarvideo.com',_meta:{developer:'[SAFAK_DEVELOPER_NAME]'}};
+export const serverInfo={name:'car-listing-check',title:'Car Listing Check',version,websiteUrl:'https://aicarvideo.com',_meta:{developer:'AI Car Video'}};
 const versions=['2025-03-26','2025-06-18','2025-11-25'];
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS','Access-Control-Allow-Headers':'content-type, accept, mcp-protocol-version, mcp-session-id','Access-Control-Max-Age':'86400'};
 const json=(data:unknown,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,'content-type':'application/json','cache-control':'no-store'}});

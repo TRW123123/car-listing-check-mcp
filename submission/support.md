@@ -1,14 +1,14 @@
 # Car Listing Check Support
 
-Effective date: [EFFECTIVE_DATE]
+Effective date: 2026-11-03
 
-Operator: [SAFAK_LEGAL_NAME]
+Operator: Safak Tepecik, operating as AI Car Video
 
-Postal address: [SAFAK_POSTAL_ADDRESS]
+Postal address: Heidestraße 2, 58239 Schwerte, Germany
 
-Support: [SAFAK_CONTACT_EMAIL]
+Support: hello@aicarvideo.com
 
-Security: [SAFAK_SECURITY_CONTACT_EMAIL]
+Security: hello@aicarvideo.com
 
 ## Getting help
 
@@ -24,8 +24,8 @@ Use a client supporting remote Streamable HTTP and POST requests. GET /mcp retur
 
 ## Security reports
 
-Send security concerns privately to [SAFAK_SECURITY_CONTACT_EMAIL]. Include the affected route, impact and safe reproduction steps using fictional data. Do not include tokens or exploit other users' data. Do not overload the service. We will assess the report and coordinate any response; no response deadline or reward is promised.
+Send security concerns privately to hello@aicarvideo.com. Include the affected route, impact and safe reproduction steps using fictional data. Do not include tokens or exploit other users' data. Do not overload the service. We will assess the report and coordinate any response; no response deadline or reward is promised.
 
 ## Policy questions
 
-Contact [SAFAK_CONTACT_EMAIL] for privacy requests, accessibility issues or questions about these pages. Updates will be reflected in the effective date.
+Contact hello@aicarvideo.com for privacy requests, accessibility issues or questions about these pages. Updates will be reflected in the effective date.
