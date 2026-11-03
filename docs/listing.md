@@ -9,7 +9,7 @@ The maintained platform-specific drafts are [Claude](../submission/listing-claud
 - starterPrompt1: Check this supplied listing: title Ford Focus Automatic; six photos.
 - starterPrompt2: Give me a UK used-car listing checklist.
 - starterPrompt3: Check this supplied German new-car title: New car. Condition: new; market: de.
-- developer: [SAFAK_DEVELOPER_NAME] (option: AI Car Video; confirm before submission)
+- developer: AI Car Video (operated by Safak Tepecik; must match the verified publisher identity)
 - Website: https://aicarvideo.com
 - Documentation: https://github.com/TRW123123/car-listing-check-mcp/blob/submission-prep/README.md (private; reviewers need access or a public documentation page must be published first)
 - Privacy: https://aicarvideo.com/mcp/privacy — page must be published first
