@@ -2,16 +2,9 @@ import { shots } from './schema';
 export type Market='de'|'us'|'uk'|'generic';
 export interface Input {title?:string;description?:string;fields?:Record<string,string|number|boolean>;image_urls?:string[];photo_count?:number;photo_order?:string[];video_url?:string;has_walkaround_video?:boolean;market?:Market;language?:'auto'|'de'|'en'}
 export type Check={id:string;category:string;status:'pass'|'warn'|'fail';message:string;fix:string};
-export const scope='Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, or provide legal advice.';
-// Field/wording references (read-only):
-// /home/box/seitenbau/aicarvideo-static/public/tools/car-listing-description-generator/{app.js,index.html}
-// /home/box/seitenbau/autohaus-video-static/public/tools/fahrzeugbeschreibung-generator/{app.js,index.html}
-// Structure, condition disclosure and photos grounded in:
-// /home/box/seitenbau/autohaus-video-static/src/wissen/gebrauchtwagen-inserat-optimieren.html
-// /home/box/seitenbau/autohaus-video-static/src/wissen/welche-fotos-brauche-ich-fuer-ein-autohaus-video.html
-// Actual walkaround vs evidence limits:
-// /home/box/seitenbau/aicarvideo-static/src/walkaround-condition-video/index.html
-// General DE energy reminder: https://www.gesetze-im-internet.de/pkw-envkv/anlage_4.html (reviewed 2026-11-03).
+export const scope='Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice.';
+// Ported from the aicarvideo.com / autohaus-video.de listing checker.
+// Editorial guidance covers structure, condition disclosure and photo metadata.
 // Numeric title/description/photo thresholds below are our editorial recommendations, not portal rules.
 export function coreFields(market:Market,condition?:string){return ['make','model','price','currency','mileage','mileage_unit','fuel_type','transmission','condition','location',...(condition==='new'?[]:['first_registration','service_history']),...(market==='de'?['power','inspection_due',...(condition==='new'?['consumption','co2','energy_efficiency']:[])]:[]),...(market==='uk'?['inspection_due']:[]),...(market==='us'?['model_year','vin_provided']:[])];}
 export function checklist(market:Market='generic',condition?:string){return {market,vehicle_condition:condition??'both',required_fields:coreFields(market,condition),additional_fields:['variant','body_type','color','doors','seats','previous_owners','accident_free','power_kw or power_hp','known_damage','contact_provided'],photo_shots:shots,photo_recommendation:'Recommended minimum: 8 distinct photos; ideal: 12–20. Cover the actual vehicle; add damage photos for known damage. These are recommendations, not portal requirements.',title_pattern:'Make + model + variant/engine + one useful key specification; recommended 30–80 characters.',description_structure:['Vehicle overview and core specifications','Condition and known issues','Documented service, inspection and repair history','Verified equipment in bullets','Full price, currency and mandatory charges','Location, contact and viewing next step'],market_guidance:market==='de'?'General guidance: new cars need applicable Pkw-EnVKV consumption, CO2 and energy-efficiency information. Check current requirements before publishing; this is not legal advice.':market==='us'?'State model year and VIN availability; explain title/accident history and full price including mandatory charges. Local requirements vary.':market==='uk'?'State registration, mileage units, MOT/inspection status and full price including mandatory charges. Local requirements vary.':'State registration/year, mileage units, condition, full price and contact route. Local requirements vary.',scope};}
