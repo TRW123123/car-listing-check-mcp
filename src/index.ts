@@ -1,8 +1,9 @@
 import {checkListing,checklist,type Input,type Market} from './logic';
 import {validate} from './schema';
 import {tools} from './tools';
+import {version} from '../package.json';
 export interface Env {ANALYTICS?:{writeDataPoint(point:{blobs:string[];doubles:number[]}):void}}
-export const serverInfo={name:'car-listing-check',title:'Car Listing Check',version:'0.1.0',websiteUrl:'https://autohaus-video.de',_meta:{developer:'Autohaus-Video'}};
+export const serverInfo={name:'car-listing-check',title:'Car Listing Check',version,websiteUrl:'https://aicarvideo.com',_meta:{developer:'[SAFAK_DEVELOPER_NAME]'}};
 const versions=['2025-03-26','2025-06-18','2025-11-25'];
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'POST, GET, OPTIONS','Access-Control-Allow-Headers':'content-type, accept, mcp-protocol-version, mcp-session-id','Access-Control-Max-Age':'86400'};
 const json=(data:unknown,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,'content-type':'application/json','cache-control':'no-store'}});
@@ -15,7 +16,7 @@ export default {async fetch(req:Request,env:Env={}):Promise<Response>{
  const path=new URL(req.url).pathname;
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:cors});
  if(path==='/health'&&req.method==='GET')return json({status:'ok'});
- if(path==='/'&&req.method==='GET')return new Response('Car Listing Check\nChecks supplied vehicle listings for completeness and presentation.\nWebsite and documentation: https://autohaus-video.de\nPOST JSON-RPC to /mcp. No website fetching or scraping.\n',{headers:{...cors,'content-type':'text/plain; charset=utf-8'}});
+ if(path==='/'&&req.method==='GET')return new Response('Car Listing Check\nChecks supplied vehicle listings for completeness and presentation.\nWebsite and documentation: https://aicarvideo.com\nPOST JSON-RPC to /mcp. No website fetching or scraping.\n',{headers:{...cors,'content-type':'text/plain; charset=utf-8'}});
  if(path!=='/mcp')return json({error:'Route not found. Use /health or POST /mcp.'},404);
  if(req.method!=='POST')return new Response(JSON.stringify({error:'Use POST /mcp with JSON-RPC; GET streaming is not offered.'}),{status:405,headers:{...cors,'content-type':'application/json',Allow:'POST, OPTIONS'}});
  if(limited(req.headers.get('cf-connecting-ip')))return json({error:'Too many requests. Retry after one minute.'},429);

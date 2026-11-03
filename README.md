@@ -2,11 +2,11 @@
 
 Dealer vehicle listings often omit the information a buyer needs: exact specifications, known issues, service records, useful photos or a clear next step. This remote MCP server applies a consistent, inspectable checklist to content supplied by the user and returns a score and concrete fixes.
 
-## Status: not deployed, not submitted
+## Status: live endpoint; submission preparation
 
-Version 0.1.0. The proposed production URL is **https://mcp.autohaus-video.de/mcp**. It is NOT set up. The main website is on Netlify; DNS and the subdomain arrangement are to be decided by Safak. No deployment, login, domain challenge, registry submission, repository creation or push is included in this build.
+Version 0.1.2 is prepared on `submission-prep`; these changes need an approved redeploy. The existing live endpoint is **https://mcp.aicarvideo.com/mcp**, served through Netlify site `mcp-aicar-proxy` in front of the Cloudflare Worker. No deployment or submission is part of this preparation.
 
-Metadata: server `car-listing-check`, title **Car Listing Check**, developer **Autohaus-Video**, website https://autohaus-video.de. Owner: Safak Tepecik. https://aicarvideo.com is the English-language sister site. Open point: Safak decides which website URL goes into each catalog listing. Tool descriptions and results contain no brand promotion.
+Display name: **Car Listing Check**. Website: https://aicarvideo.com. Developer: **[SAFAK_DEVELOPER_NAME]** (option: AI Car Video; operator must confirm). Legal identity and contacts are placeholders in [submission/](submission/README.md). Tool descriptions and results contain no brand promotion.
 
 ## Tools
 
@@ -45,14 +45,14 @@ Verified local output excerpt (complete response includes all checks):
 
 Checklist prompt: “Give me a UK used-car listing checklist with a recommended photo sequence.” No listing URL is needed.
 
-## Connect after an endpoint exists
+## Connect to the endpoint
 
-All production snippets below are **proposals**, not live installations. Local HTTP is usable by clients that permit localhost; hosted assistants normally need a publicly reachable HTTPS endpoint.
+The production endpoint above is live; these client configurations have not been evaluated end to end in assistant accounts. Local HTTP is usable by clients that permit localhost; hosted assistants normally need a publicly reachable HTTPS endpoint.
 
-Claude: Settings → Connectors → Add custom connector → enter the remote URL `https://mcp.autohaus-video.de/mcp`. Labels and availability can vary by account. Claude Code:
+Claude: Settings → Connectors → Add custom connector → enter the remote URL `https://mcp.aicarvideo.com/mcp`. Labels and availability can vary by account. Claude Code:
 
 ```sh
-claude mcp add --transport http car-listing-check https://mcp.autohaus-video.de/mcp
+claude mcp add --transport http car-listing-check https://mcp.aicarvideo.com/mcp
 ```
 
 ChatGPT: enable Developer mode in the account/workspace settings, create a custom connector/app, enter the remote MCP URL, and select it in a conversation. Availability depends on account and administrator settings. See [official connection documentation](https://developers.openai.com/plugins/deploy/connect-chatgpt).
@@ -61,15 +61,15 @@ Codex, `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.car-listing-check]
-url = "https://mcp.autohaus-video.de/mcp"
+url = "https://mcp.aicarvideo.com/mcp"
 ```
 
-Or `codex mcp add car-listing-check --url https://mcp.autohaus-video.de/mcp`. Syntax verified locally with `codex mcp add --help`; see [official MCP setup examples](https://developers.openai.com/learn/docs-mcp). No API key or login is needed by this server.
+Or `codex mcp add car-listing-check --url https://mcp.aicarvideo.com/mcp`. Syntax verified locally with `codex mcp add --help`; see [official MCP setup examples](https://developers.openai.com/learn/docs-mcp). No API key or login is needed by this server.
 
 Cursor, `.cursor/mcp.json`:
 
 ```json
-{"mcpServers":{"car-listing-check":{"url":"https://mcp.autohaus-video.de/mcp"}}}
+{"mcpServers":{"car-listing-check":{"url":"https://mcp.aicarvideo.com/mcp"}}}
 ```
 
 ## Local development
@@ -90,16 +90,16 @@ npm run secret-scan
 
 `POST /mcp` supports initialize, notifications/initialized, ping, tools/list and tools/call. Responses use application/json; notifications return HTTP 202 with no body. It is stateless: no sessions or auth. Negotiated versions: 2025-03-26, 2025-06-18 and 2025-11-25, default 2025-06-18 for unsupported initialize versions. Unknown protocol headers are rejected. GET /mcp returns 405; GET /health returns `{"status":"ok"}`; GET / explains the service. CORS allows any origin and the MCP headers. JSON-RPC response ids only correlate the client's own ids; no generated trace/request ids are added.
 
-Body limit: 300,000 UTF-8 bytes; body read timeout: five seconds; arrays max 100; output bounded by a fixed checklist. Batches are rejected. A best-effort isolate-local IP limiter permits 120 POSTs/minute and holds at most 2,048 short-lived buckets. IPs stay in volatile memory for up to one minute, are not logged or persisted, and disappear on isolate recycling. This is not a global limit; edge protection needs operator configuration before public launch. URLs cannot trigger SSRF because there is no outbound fetch. A warm local benchmark exercises maximum-size listing text and 100 URLs; it is indicative wall time, not a guarantee of deployed Workers CPU usage. Measure production CPU before launch.
+Body limit: 300,000 UTF-8 bytes; body read timeout: five seconds; arrays max 100; output bounded by a fixed checklist. Batches are rejected. A best-effort isolate-local IP limiter permits 120 POSTs/minute and holds at most 2,048 short-lived buckets. IPs stay in volatile memory for a one-minute counting window, are not logged or persisted, and disappear on lazy expiry cleanup or isolate recycling; idle isolates may retain expired buckets longer. This is not a global limit; edge protection needs operator configuration before public launch. URLs cannot trigger SSRF because there is no outbound fetch. A warm local benchmark exercises maximum-size listing text and 100 URLs; it is indicative wall time, not a guarantee of deployed Workers CPU usage. Measure production CPU before launch.
 
 ## Privacy and operations
 
-Inputs are processed in memory only and never stored by the application. Avoid private contact details, actual VINs, credentials and documents containing personal data. Tools need only listing text, town/region and VIN availability. Application logs record one anonymous line per tool call: `{"evt":"tool_call","tool":"check_car_listing","ok":true,"ms":1}`. Unknown tool names log as `unknown`, preventing arbitrary input from entering logs. No inputs or IPs enter logs. Cloudflare hosting may process network metadata independently; operator settings and retention need review.
+Inputs are processed in memory only and never stored by the application. Avoid private contact details, actual VINs, credentials and documents containing personal data. Tools need only listing text, town/region and VIN availability. Application logs record one anonymous line per tool call: `{"evt":"tool_call","tool":"check_car_listing","ok":true,"ms":1}`. Unknown tool names log as `unknown`, preventing arbitrary input from entering logs. No inputs or IPs enter logs. Cloudflare and the Netlify proxy process request contents and network metadata independently; operator settings and retention need review. IP bucket expiry is lazy: stale entries are removed on the next request with an IP, or on isolate recycling.
 
-Optional Workers Analytics Engine support is guarded by `if (env.ANALYTICS)`. To enable after operator approval, uncomment the dataset block in wrangler.toml and configure the dataset in the operator's account. Data points use blobs `[tool, "true" or "false"]` and doubles `[milliseconds]` only. It is prepared for the available free-tier allowance; confirm current limits before enabling. Console logging remains enabled. Set a retention policy before launch; no production retention or processor terms have been confirmed. Review aggregate tool selection weekly and configure an external uptime monitor for /health after deployment. No external monitoring is set up.
+Optional Workers Analytics Engine support is guarded by `if (env.ANALYTICS)`. To enable after operator approval, uncomment the dataset block in wrangler.toml and configure the dataset in the operator's account. Data points use blobs `[tool, "true" or "false"]` and doubles `[milliseconds]` only. Review provider limits before enabling. Console logging remains enabled. Set a retention policy before launch; no production retention or processor terms have been confirmed. Review aggregate tool selection weekly and configure an external uptime monitor for /health after deployment. No external monitoring is set up.
 
 Drafts: [Privacy](docs/privacy-policy.md), [Terms](docs/terms-of-service.md), [Support and security contact](docs/support.md), [Catalog metadata](docs/listing.md), [Submission cases and golden prompts](docs/openai-test-cases.md). Contact and postal details remain explicit operator placeholders.
 
-`server.json` is prepared for `de.autohaus-video/car-listing-check`, using the [2025-12-11 registry schema](https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json). It is NOT published. Domain authentication (DNS TXT or the registry well-known route), a reachable HTTPS service and Safak's approval remain required; no key or challenge is created. Before catalog submission: confirm domain and URLs, publish approved legal/support documents, verify developer identity, prepare a square icon and demonstration video, run the golden prompts in real ChatGPT/Claude accounts, confirm retention/hosting terms and monitor the live service. Neither assistant end-to-end evaluation nor catalog acceptance is claimed.
+`server.json` is prepared for `com.aicarvideo/car-listing-check`, using the [2025-12-11 registry schema](https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json). It is NOT published. Domain authentication (DNS TXT or the registry well-known route) and Safak's approval remain required; no key or challenge is created. Before catalog submission: confirm domain and URLs, publish approved legal/support documents, verify developer identity, review the prepared square icon and record the demonstration video, run the golden prompts in real ChatGPT/Claude accounts, confirm retention/hosting terms and monitor the live service. Neither assistant end-to-end evaluation nor catalog acceptance is claimed.
 
 MIT license, copyright Safak Tepecik.

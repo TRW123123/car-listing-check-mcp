@@ -1,9 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "de.autohaus-video/car-listing-check",
+  "name": "com.aicarvideo/car-listing-check",
   "title": "Car Listing Check",
   "description": "Check supplied vehicle listings for completeness and presentation, with a score and concrete fixes.",
-  "version": "0.1.0",
-  "websiteUrl": "https://autohaus-video.de",
-  "remotes": [{"type": "streamable-http", "url": "https://mcp.autohaus-video.de/mcp"}]
+  "version": "0.1.2",
+  "websiteUrl": "https://aicarvideo.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.aicarvideo.com/mcp"
+    }
+  ]
 }

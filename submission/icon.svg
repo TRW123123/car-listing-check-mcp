@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Car Listing Check</title>
+  <desc id="desc">A simple car silhouette and a check mark on a dark square.</desc>
+  <rect width="512" height="512" rx="96" fill="#132b42"/>
+  <path d="M92 270l32-78c8-20 23-30 46-30h135c23 0 38 10 46 30l32 78v89H92z" fill="#f5f8fc"/>
+  <path d="M145 205h185l20 55H125z" fill="#132b42"/>
+  <rect x="116" y="344" width="48" height="44" rx="12" fill="#f5f8fc"/>
+  <rect x="311" y="344" width="48" height="44" rx="12" fill="#f5f8fc"/>
+  <circle cx="141" cy="306" r="17" fill="#132b42"/>
+  <circle cx="333" cy="306" r="17" fill="#132b42"/>
+  <circle cx="373" cy="365" r="82" fill="#37d6ab" stroke="#132b42" stroke-width="14"/>
+  <path d="M335 365l26 27 49-57" fill="none" stroke="#132b42" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
