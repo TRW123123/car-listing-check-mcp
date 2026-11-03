@@ -1,0 +1,10 @@
+name = "car-listing-check"
+main = "src/index.ts"
+compatibility_date = "2026-11-03"
+[dev]
+port = 8788
+ip = "127.0.0.1"
+# Optional, enable only after operator account/dataset review:
+# [[analytics_engine_datasets]]
+# binding = "ANALYTICS"
+# dataset = "car_listing_check_calls"

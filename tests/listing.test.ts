@@ -1,0 +1,3 @@
+import {it,expect} from 'vitest';
+import {readFileSync} from 'node:fs';
+it('catalog text respects every cross-catalog length limit',()=>{const s=readFileSync(new URL('../docs/listing.md',import.meta.url),'utf8');for(const [key,max] of Object.entries({displayName:30,shortDescription:30,longDescription:2000,'Claude one-liner':200,starterPrompt1:128,starterPrompt2:128,starterPrompt3:128})){const value=s.split('\n').find(l=>l.startsWith(`- ${key}: `))?.slice(key.length+4);expect(value).toBeTruthy();expect(Array.from(value!).length).toBeLessThanOrEqual(max);if(key==='displayName')expect(value).not.toMatch(/MCP|Plugin/i);}});
