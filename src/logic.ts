@@ -1,6 +1,7 @@
 import { shots } from './schema';
 export type Market='de'|'us'|'uk'|'generic';
-export interface Input {title?:string;description?:string;fields?:Record<string,string|number|boolean>;image_urls?:string[];photo_count?:number;photo_order?:string[];video_url?:string;has_walkaround_video?:boolean;market?:Market;language?:'auto'|'de'|'en'}
+export type ListingMarket=Market|'DE'|'at'|'AT'|'ch'|'CH';
+export interface Input {title?:string;description?:string;fields?:Record<string,string|number|boolean>;image_urls?:string[];photo_count?:number;photo_order?:string[];video_url?:string;has_walkaround_video?:boolean;market?:ListingMarket;language?:'auto'|'de'|'en'}
 export type Check={id:string;category:string;status:'pass'|'warn'|'fail';message:string;fix:string};
 export const scope='Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice.';
 // Ported from the aicarvideo.com / autohaus-video.de listing checker.
@@ -13,8 +14,18 @@ const equipment: [string,RegExp][]=[['navigation',/\b(navigation|navi|sat[ -]?na
 const tokens=(value:string):string[]=>value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().match(/[\p{L}\p{N}]+/gu)??[];
 const makeAliases=[['Volkswagen','VW'],['Volkswagen Nutzfahrzeuge','VW Nutzfahrzeuge'],['Mercedes','Mercedes-Benz','MB'],['BMW'],['Skoda','Škoda'],['Citroen','Citroën'],['Alfa','Alfa Romeo'],['Chevy','Chevrolet']];
 const containsTokens=(title:string[],value:string)=>{const parts=tokens(value);return parts.length>0&&parts.every(part=>title.includes(part));};
+// Shared equipment terms and km are weak signals: they also occur in English ads.
+const germanTerms=new Set('fahrzeug kilometerstand sitzheizung zustand erstzulassung getriebe scheckheftgepflegt scheckheft tüv tuev unfallfrei ausstattung nichtraucherfahrzeug automatik rückfahrkamera ruckfahrkamera gebrauchtwagen neuwagen vorbesitzer besichtigung gewährleistung gewahrleistung'.split(' '));
+const germanStopwords=new Set('der die das den dem des ein eine einer einem einen eines und oder mit ohne für fur ist sind im am zum zur aus bei von vom wir sie es wird hat wurde werden nicht nur sehr'.split(' '));
+function detectLanguage(text:string):'de'|'en'{
+ const words=new Set(tokens(text));
+ if([...words].some(word=>germanTerms.has(word)))return 'de';
+ const stopwords=[...words].filter(word=>germanStopwords.has(word)).length;
+ const germanCharacters=/[äöüß]/i.test(text.normalize('NFC'));
+ return stopwords>=2||germanCharacters||(stopwords>=1&&words.has('km'))?'de':'en';
+}
 export function checkListing(input:Input){
- const f=input.fields??{}, title=input.title??'',desc=input.description??'',text=title+'\n'+desc,low=text.toLowerCase(),market=input.market??'generic';
+ const f=input.fields??{}, title=input.title??'',desc=input.description??'',text=title+'\n'+desc,requestedMarket=input.market?.toLowerCase(),market:Market=requestedMarket==='at'||requestedMarket==='ch'?'generic':(requestedMarket as Market|undefined)??'generic';
  const has=(k:string)=>f[k]!==undefined&&f[k]!=='';
  const missing=coreFields(market,f.condition as string).filter(k=>k==='power'?!has('power_kw')&&!has('power_hp'):k==='vin_provided'?f[k]!==true:!has(k));
  const checks:Check[]=[];
@@ -65,6 +76,6 @@ export function checkListing(input:Input){
  if(market==='de'&&(f.condition==='new'||!has('condition'))){const absent=['consumption','co2','energy_efficiency'].filter(k=>!has(k));add('new_car_energy','market',absent.length?'warn':'pass','General guidance: new cars need applicable Pkw-EnVKV consumption, CO2 and energy-efficiency information; supplied values are not compliance-checked.','Confirm vehicle condition and add applicable consumption, CO2 and efficiency information. Check current requirements with a qualified adviser; not legal advice.');}
  const score=Math.round(checks.reduce((sum,c)=>sum+(c.status==='pass'?1:c.status==='warn'?.5:0),0)/checks.length*100);
  const top_fixes=checks.filter(c=>c.status!=='pass').sort((a,b)=>(a.status==='fail'?0:1)-(b.status==='fail'?0:1)).slice(0,5).map(c=>({id:c.id,priority:c.status==='fail'?'high':'medium',fix:c.fix}));
- const language=input.language&&input.language!=='auto'?input.language:/\b(und|fahrzeug|kilometerstand|sitzheizung|zustand|erstzulassung|getriebe)\b/i.test(low)?'de':'en';
+ const language=input.language&&input.language!=='auto'?input.language:requestedMarket==='de'||requestedMarket==='at'||requestedMarket==='ch'?'de':requestedMarket==='us'||requestedMarket==='uk'?'en':detectLanguage(text);
  return {score,grade:score>=90?'A':score>=75?'B':score>=60?'C':score>=40?'D':'F',market,language,checks,top_fixes,missing_fields:missing,scope};
 }
