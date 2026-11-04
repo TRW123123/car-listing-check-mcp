@@ -384,7 +384,7 @@
         "score": 55,
         "grade": "D",
         "market": "de",
-        "language": "en",
+        "language": "de",
         "checks": [
           {
             "id": "core_data",

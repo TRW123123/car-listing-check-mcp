@@ -15,5 +15,10 @@ describe('JSON-RPC Worker',()=>{
  it('rate limits repeated requests without persistent bindings',async()=>{let r:Response|undefined;for(let i=0;i<121;i++)r=await worker.fetch(new Request('https://local/mcp',{method:'POST',headers:{'content-type':'application/json','cf-connecting-ip':'192.0.2.15'},body:'{"jsonrpc":"2.0","id":1,"method":"ping"}'}));expect(r?.status).toBe(429);});
  it('enforces the body read timeout on a stalled stream',async()=>{vi.useFakeTimers();try{const pending=worker.fetch(new Request('https://local/mcp',{method:'POST',headers:{'content-type':'application/json'},body:new ReadableStream({start(controller){controller.enqueue(new TextEncoder().encode('{'));}}),duplex:'half'} as RequestInit));await vi.advanceTimersByTimeAsync(5001);const r=await pending;expect(r.status).toBe(400);expect((await r.json()).error.message).toContain('five seconds');}finally{vi.useRealTimers();}});
  it('rejects prototype-named unknown input keys',async()=>{const args=JSON.parse('{"title":"Car","__proto__":{"market":"de"}}');const r=await(await invoke('tools/call',{name:'check_car_listing',arguments:args})).json();expect(r.result.isError).toBe(true);});
+ it.each([{description:'Scheckheftgepflegt, Navi, LED',language:'auto'},{title:'Car',market:'AT'},{description:'TÜV neu',market:'DE',language:'en'}])('passes language inputs through MCP %#',async args=>{
+  const r=await(await invoke('tools/call',{name:'check_car_listing',arguments:args})).json();
+  expect(r.result.isError).toBeUndefined();
+  expect(r.result.structuredContent.language).toBe(args.language==='en'?'en':'de');
+ });
  it('never fetches URLs',async()=>{const spy=vi.spyOn(globalThis,'fetch').mockRejectedValue(Error('network forbidden'));await invoke('tools/call',{name:'check_car_listing',arguments:{title:'Car',image_urls:['http://127.0.0.1/private'],video_url:'https://example.org/video'}});expect(spy).not.toHaveBeenCalled();});
 });
