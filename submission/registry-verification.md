@@ -14,8 +14,8 @@ The public key is the base64 encoding of the raw 32-byte Ed25519 public key, not
 The private key must never be committed, pasted into issues or logged. Keep it outside the repository with restricted permissions. No key was created or read during this task. Future operator commands (not run):
 
 ```bash
-# Placeholder path only; replace with the operator's actual protected PEM path.
-registry_key_path='/home/box/.secrets/[REGISTRY_PRIVATE_KEY_FILE].pem'
+# Box path of the protected PEM (chmod 600, never commit).
+registry_key_path='/home/box/.secrets/mcp-registry-aicarvideo.com-ed25519.pem'
 # Official CLI expects raw private-key hex, not a filename argument.
 # Disable shell tracing and protect shell/session logs before loading it.
 registry_private_hex="$(openssl pkey -in "$registry_key_path" -noout -text | sed -n '/priv:/,/pub:/p' | sed '1d;$d' | tr -d ' :\n')"
