@@ -2,9 +2,9 @@
 
 Dealer vehicle listings often omit the information a buyer needs: exact specifications, known issues, service records, useful photos or a clear next step. This remote MCP server applies a consistent, inspectable checklist to content supplied by the user and returns a score and concrete fixes.
 
-## Status: live endpoint; submission preparation
+## Status: live
 
-Version 0.1.2 is prepared on `submission-prep`; these changes need an approved redeploy. The existing live endpoint is **https://mcp.aicarvideo.com/mcp**, served through Netlify site `mcp-aicar-proxy` in front of the Cloudflare Worker. No deployment or submission is part of this preparation.
+Version 0.1.2 is live at **https://mcp.aicarvideo.com/mcp** (served through Netlify site `mcp-aicar-proxy` in front of the Cloudflare Worker) and published in the [official MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=com.aicarvideo) as `com.aicarvideo/car-listing-check`.
 
 Display name: **Car Listing Check**. Website: https://aicarvideo.com. Developer: **AI Car Video** (operated by Safak Tepecik, per https://aicarvideo.com/about). Legal identity and contacts are filled in [submission/](submission/README.md). Tool descriptions and results contain no brand promotion.
 
