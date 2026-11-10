@@ -1,0 +1,927 @@
+{
+ "date": "2026-11-10T09:44:25+01:00",
+ "endpoint": "https://mcp.aicarvideo.com/mcp",
+ "calls": [
+  {
+   "id": "P1",
+   "prompt": "Check this supplied listing: title Ford Focus Automatic; six photos.",
+   "tool": "check_car_listing",
+   "arguments": {
+    "title": "Ford Focus Automatic",
+    "photo_count": 6
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 10,
+    "result": {
+     "structuredContent": {
+      "score": 58,
+      "grade": "D",
+      "market": "generic",
+      "language": "en",
+      "checks": [
+       {
+        "id": "core_data",
+        "category": "data",
+        "status": "fail",
+        "message": "Missing structured core data: make, model, price, currency, mileage, mileage_unit, fuel_type, transmission, condition, location, first_registration, service_history.",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "category": "title",
+        "status": "warn",
+        "message": "Title has 20 characters; recommended window: 30–80, not a portal limit.",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "category": "title",
+        "status": "warn",
+        "message": "Title should identify make, model and a useful specification.",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "title_repetition",
+        "category": "title",
+        "status": "pass",
+        "message": "Title repetition/keyword stuffing check.",
+        "fix": ""
+       },
+       {
+        "id": "description_length",
+        "category": "description",
+        "status": "warn",
+        "message": "Description has 0 characters; recommended 300–5,000, not a portal limit.",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "category": "description",
+        "status": "warn",
+        "message": "Check for readable sections or bullet lines.",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       },
+       {
+        "id": "equipment",
+        "category": "description",
+        "status": "warn",
+        "message": "Equipment topics not detected: navigation, heated seats, LED headlights, adaptive cruise control, parking sensors, camera, Apple CarPlay / Android Auto, tow bar, air conditioning, alloy wheels, sunroof. Keyword presence does not prove fitment.",
+        "fix": "List relevant equipment only if fitted and verified. Omit absent features; do not copy a specification from a similar car."
+       },
+       {
+        "id": "condition_disclosure",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Condition and known-issue wording check.",
+        "fix": "Describe visible wear, known defects and repair/accident history accurately; use unknown where necessary."
+       },
+       {
+        "id": "photo_count",
+        "category": "photos",
+        "status": "warn",
+        "message": "6 photos reported. Recommended minimum 8; ideal 12–20 distinct views; no portal requirement implied.",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "photo_duplicates",
+        "category": "photos",
+        "status": "warn",
+        "message": "No URLs supplied; duplicate images cannot be assessed.",
+        "fix": "Remove repeated URL entries and manually review visually similar images."
+       },
+       {
+        "id": "photo_url_format",
+        "category": "photos",
+        "status": "warn",
+        "message": "No image URL format hints available.",
+        "fix": "Supply ordinary HTTP(S) image URLs if available; extensions are not required."
+       },
+       {
+        "id": "photo_order",
+        "category": "photos",
+        "status": "warn",
+        "message": "Order based on no shot data; missing/unconfirmed views: interior_front, odometer, trunk, wheels.",
+        "fix": "Start with a front 3/4 exterior view, then side/rear, interior, dashboard/odometer, trunk and wheels/tyres. Labels and filenames do not verify image content."
+       },
+       {
+        "id": "damage_photos",
+        "category": "photos",
+        "status": "pass",
+        "message": "No explicit damage indication detected; condition is not verified.",
+        "fix": ""
+       },
+       {
+        "id": "walkaround",
+        "category": "video",
+        "status": "warn",
+        "message": "Walkaround presence is based only on supplied metadata, not verified.",
+        "fix": "Add a walkaround video of the actual vehicle as a best-practice tip."
+       },
+       {
+        "id": "price_transparency",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Full asking price and currency should be explicit.",
+        "fix": "Supply the total asking price and currency; explain mandatory charges and distinguish finance instalments."
+       },
+       {
+        "id": "contact",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Actionable contact/viewing route wording check.",
+        "fix": "State an available contact route and how to arrange a viewing; test it before publishing."
+       },
+       {
+        "id": "red_flags",
+        "category": "transparency",
+        "status": "pass",
+        "message": "Potentially ambiguous warranty/condition wording check.",
+        "fix": ""
+       },
+       {
+        "id": "formatting",
+        "category": "formatting",
+        "status": "pass",
+        "message": "Shouting, excessive punctuation and emoji overload check.",
+        "fix": ""
+       }
+      ],
+      "top_fixes": [
+       {
+        "id": "core_data",
+        "priority": "high",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "priority": "medium",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "priority": "medium",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "description_length",
+        "priority": "medium",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "priority": "medium",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       }
+      ],
+      "missing_fields": [
+       "make",
+       "model",
+       "price",
+       "currency",
+       "mileage",
+       "mileage_unit",
+       "fuel_type",
+       "transmission",
+       "condition",
+       "location",
+       "first_registration",
+       "service_history"
+      ],
+      "scope": "Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice."
+     },
+     "content": [
+      {
+       "type": "text",
+       "text": "Listing score: 58/100 (D). 5 prioritised fixes. Checks use supplied content only."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "P2",
+   "prompt": "Review this supplied German listing: Zustand gut, Sitzheizung, 60.000 km.",
+   "tool": "check_car_listing",
+   "arguments": {
+    "description": "Zustand gut, Sitzheizung, 60.000 km."
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 11,
+    "result": {
+     "structuredContent": {
+      "score": 58,
+      "grade": "D",
+      "market": "generic",
+      "language": "de",
+      "checks": [
+       {
+        "id": "core_data",
+        "category": "data",
+        "status": "fail",
+        "message": "Missing structured core data: make, model, price, currency, mileage, mileage_unit, fuel_type, transmission, condition, location, first_registration, service_history.",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "category": "title",
+        "status": "warn",
+        "message": "Title has 0 characters; recommended window: 30–80, not a portal limit.",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "category": "title",
+        "status": "warn",
+        "message": "Title should identify make, model and a useful specification.",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "title_repetition",
+        "category": "title",
+        "status": "pass",
+        "message": "Title repetition/keyword stuffing check.",
+        "fix": ""
+       },
+       {
+        "id": "description_length",
+        "category": "description",
+        "status": "warn",
+        "message": "Description has 36 characters; recommended 300–5,000, not a portal limit.",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "category": "description",
+        "status": "warn",
+        "message": "Check for readable sections or bullet lines.",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       },
+       {
+        "id": "equipment",
+        "category": "description",
+        "status": "warn",
+        "message": "Equipment topics not detected: navigation, LED headlights, adaptive cruise control, parking sensors, camera, Apple CarPlay / Android Auto, tow bar, air conditioning, alloy wheels, sunroof. Keyword presence does not prove fitment.",
+        "fix": "List relevant equipment only if fitted and verified. Omit absent features; do not copy a specification from a similar car."
+       },
+       {
+        "id": "condition_disclosure",
+        "category": "transparency",
+        "status": "pass",
+        "message": "Condition and known-issue wording check.",
+        "fix": ""
+       },
+       {
+        "id": "photo_count",
+        "category": "photos",
+        "status": "fail",
+        "message": "0 photos reported. Recommended minimum 8; ideal 12–20 distinct views; no portal requirement implied.",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "photo_duplicates",
+        "category": "photos",
+        "status": "warn",
+        "message": "No URLs supplied; duplicate images cannot be assessed.",
+        "fix": "Remove repeated URL entries and manually review visually similar images."
+       },
+       {
+        "id": "photo_url_format",
+        "category": "photos",
+        "status": "warn",
+        "message": "No image URL format hints available.",
+        "fix": "Supply ordinary HTTP(S) image URLs if available; extensions are not required."
+       },
+       {
+        "id": "photo_order",
+        "category": "photos",
+        "status": "warn",
+        "message": "Order based on no shot data; missing/unconfirmed views: interior_front, odometer, trunk, wheels.",
+        "fix": "Start with a front 3/4 exterior view, then side/rear, interior, dashboard/odometer, trunk and wheels/tyres. Labels and filenames do not verify image content."
+       },
+       {
+        "id": "damage_photos",
+        "category": "photos",
+        "status": "pass",
+        "message": "No explicit damage indication detected; condition is not verified.",
+        "fix": ""
+       },
+       {
+        "id": "walkaround",
+        "category": "video",
+        "status": "warn",
+        "message": "Walkaround presence is based only on supplied metadata, not verified.",
+        "fix": "Add a walkaround video of the actual vehicle as a best-practice tip."
+       },
+       {
+        "id": "price_transparency",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Full asking price and currency should be explicit.",
+        "fix": "Supply the total asking price and currency; explain mandatory charges and distinguish finance instalments."
+       },
+       {
+        "id": "contact",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Actionable contact/viewing route wording check.",
+        "fix": "State an available contact route and how to arrange a viewing; test it before publishing."
+       },
+       {
+        "id": "red_flags",
+        "category": "transparency",
+        "status": "pass",
+        "message": "Potentially ambiguous warranty/condition wording check.",
+        "fix": ""
+       },
+       {
+        "id": "formatting",
+        "category": "formatting",
+        "status": "pass",
+        "message": "Shouting, excessive punctuation and emoji overload check.",
+        "fix": ""
+       }
+      ],
+      "top_fixes": [
+       {
+        "id": "core_data",
+        "priority": "high",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "photo_count",
+        "priority": "high",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "title_length",
+        "priority": "medium",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "priority": "medium",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "description_length",
+        "priority": "medium",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       }
+      ],
+      "missing_fields": [
+       "make",
+       "model",
+       "price",
+       "currency",
+       "mileage",
+       "mileage_unit",
+       "fuel_type",
+       "transmission",
+       "condition",
+       "location",
+       "first_registration",
+       "service_history"
+      ],
+      "scope": "Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice."
+     },
+     "content": [
+      {
+       "type": "text",
+       "text": "Listing score: 58/100 (D). 5 prioritised fixes. Checks use supplied content only."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "P3",
+   "prompt": "Check this supplied German new-car title: New car. Condition: new; market: de.",
+   "tool": "check_car_listing",
+   "arguments": {
+    "title": "New car",
+    "market": "de",
+    "fields": {
+     "condition": "new"
+    }
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 12,
+    "result": {
+     "structuredContent": {
+      "score": 55,
+      "grade": "D",
+      "market": "de",
+      "language": "de",
+      "checks": [
+       {
+        "id": "core_data",
+        "category": "data",
+        "status": "fail",
+        "message": "Missing structured core data: make, model, price, currency, mileage, mileage_unit, fuel_type, transmission, location, power, inspection_due, consumption, co2, energy_efficiency.",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "category": "title",
+        "status": "warn",
+        "message": "Title has 7 characters; recommended window: 30–80, not a portal limit.",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "category": "title",
+        "status": "warn",
+        "message": "Title should identify make, model and a useful specification.",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "title_repetition",
+        "category": "title",
+        "status": "pass",
+        "message": "Title repetition/keyword stuffing check.",
+        "fix": ""
+       },
+       {
+        "id": "description_length",
+        "category": "description",
+        "status": "warn",
+        "message": "Description has 0 characters; recommended 300–5,000, not a portal limit.",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "category": "description",
+        "status": "warn",
+        "message": "Check for readable sections or bullet lines.",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       },
+       {
+        "id": "equipment",
+        "category": "description",
+        "status": "warn",
+        "message": "Equipment topics not detected: navigation, heated seats, LED headlights, adaptive cruise control, parking sensors, camera, Apple CarPlay / Android Auto, tow bar, air conditioning, alloy wheels, sunroof. Keyword presence does not prove fitment.",
+        "fix": "List relevant equipment only if fitted and verified. Omit absent features; do not copy a specification from a similar car."
+       },
+       {
+        "id": "condition_disclosure",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Condition and known-issue wording check.",
+        "fix": "Describe visible wear, known defects and repair/accident history accurately; use unknown where necessary."
+       },
+       {
+        "id": "photo_count",
+        "category": "photos",
+        "status": "fail",
+        "message": "0 photos reported. Recommended minimum 8; ideal 12–20 distinct views; no portal requirement implied.",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "photo_duplicates",
+        "category": "photos",
+        "status": "warn",
+        "message": "No URLs supplied; duplicate images cannot be assessed.",
+        "fix": "Remove repeated URL entries and manually review visually similar images."
+       },
+       {
+        "id": "photo_url_format",
+        "category": "photos",
+        "status": "warn",
+        "message": "No image URL format hints available.",
+        "fix": "Supply ordinary HTTP(S) image URLs if available; extensions are not required."
+       },
+       {
+        "id": "photo_order",
+        "category": "photos",
+        "status": "warn",
+        "message": "Order based on no shot data; missing/unconfirmed views: interior_front, odometer, trunk, wheels.",
+        "fix": "Start with a front 3/4 exterior view, then side/rear, interior, dashboard/odometer, trunk and wheels/tyres. Labels and filenames do not verify image content."
+       },
+       {
+        "id": "damage_photos",
+        "category": "photos",
+        "status": "pass",
+        "message": "No explicit damage indication detected; condition is not verified.",
+        "fix": ""
+       },
+       {
+        "id": "walkaround",
+        "category": "video",
+        "status": "warn",
+        "message": "Walkaround presence is based only on supplied metadata, not verified.",
+        "fix": "Add a walkaround video of the actual vehicle as a best-practice tip."
+       },
+       {
+        "id": "price_transparency",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Full asking price and currency should be explicit.",
+        "fix": "Supply the total asking price and currency; explain mandatory charges and distinguish finance instalments."
+       },
+       {
+        "id": "contact",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Actionable contact/viewing route wording check.",
+        "fix": "State an available contact route and how to arrange a viewing; test it before publishing."
+       },
+       {
+        "id": "red_flags",
+        "category": "transparency",
+        "status": "pass",
+        "message": "Potentially ambiguous warranty/condition wording check.",
+        "fix": ""
+       },
+       {
+        "id": "formatting",
+        "category": "formatting",
+        "status": "pass",
+        "message": "Shouting, excessive punctuation and emoji overload check.",
+        "fix": ""
+       },
+       {
+        "id": "new_car_energy",
+        "category": "market",
+        "status": "warn",
+        "message": "General guidance: new cars need applicable Pkw-EnVKV consumption, CO2 and energy-efficiency information; supplied values are not compliance-checked.",
+        "fix": "Confirm vehicle condition and add applicable consumption, CO2 and efficiency information. Check current requirements with a qualified adviser; not legal advice."
+       }
+      ],
+      "top_fixes": [
+       {
+        "id": "core_data",
+        "priority": "high",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "photo_count",
+        "priority": "high",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "title_length",
+        "priority": "medium",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "priority": "medium",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "description_length",
+        "priority": "medium",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       }
+      ],
+      "missing_fields": [
+       "make",
+       "model",
+       "price",
+       "currency",
+       "mileage",
+       "mileage_unit",
+       "fuel_type",
+       "transmission",
+       "location",
+       "power",
+       "inspection_due",
+       "consumption",
+       "co2",
+       "energy_efficiency"
+      ],
+      "scope": "Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice."
+     },
+     "content": [
+      {
+       "type": "text",
+       "text": "Listing score: 55/100 (D). 5 prioritised fixes. Checks use supplied content only."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "P4",
+   "prompt": "Give me a UK used-car listing checklist.",
+   "tool": "get_car_listing_checklist",
+   "arguments": {
+    "market": "uk",
+    "vehicle_condition": "used"
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 13,
+    "result": {
+     "structuredContent": {
+      "market": "uk",
+      "vehicle_condition": "used",
+      "required_fields": [
+       "make",
+       "model",
+       "price",
+       "currency",
+       "mileage",
+       "mileage_unit",
+       "fuel_type",
+       "transmission",
+       "condition",
+       "location",
+       "first_registration",
+       "service_history",
+       "inspection_due"
+      ],
+      "additional_fields": [
+       "variant",
+       "body_type",
+       "color",
+       "doors",
+       "seats",
+       "previous_owners",
+       "accident_free",
+       "power_kw or power_hp",
+       "known_damage",
+       "contact_provided"
+      ],
+      "photo_shots": [
+       "front_3_4",
+       "side",
+       "rear",
+       "interior_front",
+       "dashboard",
+       "odometer",
+       "trunk",
+       "wheels",
+       "engine",
+       "damage"
+      ],
+      "photo_recommendation": "Recommended minimum: 8 distinct photos; ideal: 12–20. Cover the actual vehicle; add damage photos for known damage. These are recommendations, not portal requirements.",
+      "title_pattern": "Make + model + variant/engine + one useful key specification; recommended 30–80 characters.",
+      "description_structure": [
+       "Vehicle overview and core specifications",
+       "Condition and known issues",
+       "Documented service, inspection and repair history",
+       "Verified equipment in bullets",
+       "Full price, currency and mandatory charges",
+       "Location, contact and viewing next step"
+      ],
+      "market_guidance": "State registration, mileage units, MOT/inspection status and full price including mandatory charges. Local requirements vary.",
+      "scope": "Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice."
+     },
+     "content": [
+      {
+       "type": "text",
+       "text": "Checklist ready: fields, photo order, title and description recommendations. Not legal advice."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "P5",
+   "prompt": "Check this supplied title Car and these photo URL strings for duplicates without opening them: https://example.org/front_3_4.jpg and https://example.org/front_3_4.jpg#copy.",
+   "tool": "check_car_listing",
+   "arguments": {
+    "title": "Car",
+    "image_urls": [
+     "https://example.org/front_3_4.jpg",
+     "https://example.org/front_3_4.jpg#copy"
+    ]
+   },
+   "response": {
+    "jsonrpc": "2.0",
+    "id": 14,
+    "result": {
+     "structuredContent": {
+      "score": 61,
+      "grade": "C",
+      "market": "generic",
+      "language": "en",
+      "checks": [
+       {
+        "id": "core_data",
+        "category": "data",
+        "status": "fail",
+        "message": "Missing structured core data: make, model, price, currency, mileage, mileage_unit, fuel_type, transmission, condition, location, first_registration, service_history.",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "category": "title",
+        "status": "warn",
+        "message": "Title has 3 characters; recommended window: 30–80, not a portal limit.",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "category": "title",
+        "status": "warn",
+        "message": "Title should identify make, model and a useful specification.",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "title_repetition",
+        "category": "title",
+        "status": "pass",
+        "message": "Title repetition/keyword stuffing check.",
+        "fix": ""
+       },
+       {
+        "id": "description_length",
+        "category": "description",
+        "status": "warn",
+        "message": "Description has 0 characters; recommended 300–5,000, not a portal limit.",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "category": "description",
+        "status": "warn",
+        "message": "Check for readable sections or bullet lines.",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       },
+       {
+        "id": "equipment",
+        "category": "description",
+        "status": "warn",
+        "message": "Equipment topics not detected: navigation, heated seats, LED headlights, adaptive cruise control, parking sensors, camera, Apple CarPlay / Android Auto, tow bar, air conditioning, alloy wheels, sunroof. Keyword presence does not prove fitment.",
+        "fix": "List relevant equipment only if fitted and verified. Omit absent features; do not copy a specification from a similar car."
+       },
+       {
+        "id": "condition_disclosure",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Condition and known-issue wording check.",
+        "fix": "Describe visible wear, known defects and repair/accident history accurately; use unknown where necessary."
+       },
+       {
+        "id": "photo_count",
+        "category": "photos",
+        "status": "warn",
+        "message": "2 photos reported. Recommended minimum 8; ideal 12–20 distinct views; no portal requirement implied.",
+        "fix": "Add distinct exterior, interior, odometer, trunk and tyre views, plus known damage."
+       },
+       {
+        "id": "photo_duplicates",
+        "category": "photos",
+        "status": "warn",
+        "message": "1 duplicate URL entries detected; different URLs may still show the same image.",
+        "fix": "Remove repeated URL entries and manually review visually similar images."
+       },
+       {
+        "id": "photo_url_format",
+        "category": "photos",
+        "status": "pass",
+        "message": "0 URL strings are not obvious HTTP(S) addresses. No URLs were fetched.",
+        "fix": ""
+       },
+       {
+        "id": "photo_order",
+        "category": "photos",
+        "status": "warn",
+        "message": "Order based on filename hints only; missing/unconfirmed views: interior_front, odometer, trunk, wheels.",
+        "fix": "Start with a front 3/4 exterior view, then side/rear, interior, dashboard/odometer, trunk and wheels/tyres. Labels and filenames do not verify image content."
+       },
+       {
+        "id": "damage_photos",
+        "category": "photos",
+        "status": "pass",
+        "message": "No explicit damage indication detected; condition is not verified.",
+        "fix": ""
+       },
+       {
+        "id": "walkaround",
+        "category": "video",
+        "status": "warn",
+        "message": "Walkaround presence is based only on supplied metadata, not verified.",
+        "fix": "Add a walkaround video of the actual vehicle as a best-practice tip."
+       },
+       {
+        "id": "price_transparency",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Full asking price and currency should be explicit.",
+        "fix": "Supply the total asking price and currency; explain mandatory charges and distinguish finance instalments."
+       },
+       {
+        "id": "contact",
+        "category": "transparency",
+        "status": "warn",
+        "message": "Actionable contact/viewing route wording check.",
+        "fix": "State an available contact route and how to arrange a viewing; test it before publishing."
+       },
+       {
+        "id": "red_flags",
+        "category": "transparency",
+        "status": "pass",
+        "message": "Potentially ambiguous warranty/condition wording check.",
+        "fix": ""
+       },
+       {
+        "id": "formatting",
+        "category": "formatting",
+        "status": "pass",
+        "message": "Shouting, excessive punctuation and emoji overload check.",
+        "fix": ""
+       }
+      ],
+      "top_fixes": [
+       {
+        "id": "core_data",
+        "priority": "high",
+        "fix": "Supply the missing fields from vehicle records; do not guess. Text may contain data that this structured-field check cannot recognise."
+       },
+       {
+        "id": "title_length",
+        "priority": "medium",
+        "fix": "Use a concise make + model + variant + key specification title."
+       },
+       {
+        "id": "title_content",
+        "priority": "medium",
+        "fix": "Include the verified make, model and engine, transmission or trim; provide fields to allow matching."
+       },
+       {
+        "id": "description_length",
+        "priority": "medium",
+        "fix": "Add useful factual detail or remove repetition; prioritise readability."
+       },
+       {
+        "id": "description_structure",
+        "priority": "medium",
+        "fix": "Use sections for overview, condition, history, equipment, price and contact."
+       }
+      ],
+      "missing_fields": [
+       "make",
+       "model",
+       "price",
+       "currency",
+       "mileage",
+       "mileage_unit",
+       "fuel_type",
+       "transmission",
+       "condition",
+       "location",
+       "first_registration",
+       "service_history"
+      ],
+      "scope": "Checks supplied content only. Does not fetch or scrape any website, verify vehicle facts, inspect images, generate images or videos, or provide legal advice."
+     },
+     "content": [
+      {
+       "type": "text",
+       "text": "Listing score: 61/100 (C). 5 prioritised fixes. Checks use supplied content only."
+      }
+     ]
+    }
+   }
+  }
+ ],
+ "initialize": {
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+   "protocolVersion": "2025-03-26",
+   "capabilities": {
+    "tools": {
+     "listChanged": false
+    }
+   },
+   "serverInfo": {
+    "name": "car-listing-check",
+    "title": "Car Listing Check",
+    "version": "0.1.2",
+    "websiteUrl": "https://aicarvideo.com",
+    "_meta": {
+     "developer": "AI Car Video"
+    }
+   }
+  }
+ },
+ "tools": [
+  {
+   "name": "check_car_listing",
+   "annotations": {
+    "title": "Check Car Listing",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  },
+  {
+   "name": "get_car_listing_checklist",
+   "annotations": {
+    "title": "Car Listing Checklist",
+    "readOnlyHint": true,
+    "destructiveHint": false,
+    "idempotentHint": true,
+    "openWorldHint": false
+   }
+  }
+ ]
+}
